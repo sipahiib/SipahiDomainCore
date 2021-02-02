@@ -1,0 +1,126 @@
+﻿
+@model ViewModels
+
+@{
+    ViewBag.Title = "İbrahim Sipahi - Kişisel Blog Sayfası";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
+        <div class="col-md-8 px-0">
+            <h1 class="display-6 font-italic">Güncelleme işlemleri devam ediyor</h1>
+            <p class="lead my-auto">
+                * ML.NET ile Yapay Zeka Yorum Tahmin geliştirmesi @Html.ActionLink("İletişim", "Contact", "Home", new { area = "" }) sayfasına eklendi.
+                <br />
+                * NET Core geçişi yapıldı.
+                <br />
+                * Logo
+                <br />
+                * Giriş/Çıkış butonu ve Şifre Hatırlatma Sayfası
+                <br />
+                * İletişim sayfası
+            </p>
+            @*<p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Devam</a></p>*@
+        </div>
+    </div>
+
+    <div class="row mb-2">
+        <div class="col-md-6">
+            <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                    <strong class="d-inline-block mb-2 text-primary">Dünyadan Haberler</strong>
+                    <h3 class="mb-0">Son Haberler</h3>
+                    <div class="mb-1 text-muted">@DateTime.Now.Date.ToShortDateString()</div>
+                    <p class="card-text mb-auto">Detay bilgiler</p>
+                    <a href="https://www.cnnturk.com/dunya-haberleri" class="stretched-link">Devamı</a>
+                </div>
+                <div class="col-auto d-none d-lg-block">
+                    @* <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef" dy=".3em">Resim</text></svg>*@
+                    <img class="img-fluid rounded about-heading-img mb-3 mb-lg-0" width="200" height="250" src="/font/sondakika.png">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                    <strong class="d-inline-block mb-2 text-success">Sağlık</strong>
+                    <h3 class="mb-0">Covid-19 (@DateTime.Now.ToShortDateString())</h3>
+                    @*<div class="mb-1 text-muted">@DateTime.Now.ToShortDateString()</div>*@
+                    <p class="mb-auto">Türkiye Güncel Rakamları</p>
+                    <a href="https://covid19.saglik.gov.tr/TR-66935/genel-koronavirus-tablosu.html" class="stretched-link">Devamı</a>
+                </div>
+                <div class="col-auto d-none d-lg-block">
+                    @*<svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef" dy=".3em">Resim</text></svg>*@
+                    <img class="img-fluid rounded about-heading-img mb-3 mb-lg-0" width="200" height="250" src="/font/covid.jpg">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-md-8 blog-main">
+                @*<h3 class="pb-4 mb-4 font-italic border-bottom">
+                        From the Firehose
+                    </h3>*@
+
+                <div class="blog-post">
+                    <h2 class="blog-post-title">Örnek Yazı</h2>
+                    <p class="blog-post-meta">by <a href="https://www.instagram.com/sipahiib/">İbrahim</a></p>
+
+                    <p>Bilgisayar Mühendisiyim. </p>
+                    <hr>
+                </div><!-- /.blog-post -->
+
+                <div class="blog-post">
+                    <h2 class="blog-post-title">Örnek Yazı 2</h2>
+                    <p class="blog-post-meta">by <a href="https://www.instagram.com/sipahiib/">İbrahim</a></p>
+
+                    <p>Deneme</p>
+                    @*<blockquote>
+                            <p>Curabitur blandit tempus porttitor. <strong>Nullam quis risus eget urna mollis</strong> ornare vel eu leo. </p>
+                        </blockquote>
+                        <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. </p>
+                        <p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus</p>
+                    *@
+                </div><!-- /.blog-post -->
+
+
+                <nav class="blog-pagination">
+                    <a class="btn btn-outline-primary" href="#">Önceki</a>
+                    <a class="btn btn-outline-secondary" href="#" tabindex="-1">Sonraki</a>
+                </nav>
+
+            </div><!-- /.blog-main -->
+
+            <aside class="col-md-4 blog-sidebar">
+                <div class="p-4 mb-3 bg-light rounded">
+                    <h4 class="font-italic">Takip Edebilirsin</h4>
+                    @foreach (var item in Model.Followups)
+                    {
+                        <a href="@item.Link"> <p class="mb-0"><em>@item.Name</em> </p></a>
+                    }
+                </div>
+
+
+                <div class="p-4">
+                    <h4 class="font-italic">Eğitim Linkleri</h4>
+                    <ol class="list-unstyled mb-0">
+                        @foreach (var item in Model.Educations)
+                        {
+                            <li><a href="@item.Link">@item.Name</a></li>
+                        }
+                    </ol>
+                </div>
+
+            </aside><!-- /.blog-sidebar -->
+
+        </div><!-- /.row -->
+
+    </main>
+</div>
+
+
+@await Html.PartialAsync("_Footer")

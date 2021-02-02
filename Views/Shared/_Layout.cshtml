@@ -1,0 +1,42 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!doctype html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta property="og:url" content="www.ibrahimsipahi.com" />
+    <meta name="title" content="İbrahim Sipahi Kişisel Blog">
+    <meta name="description" content="İbrahim Sipahi Kişisel Blog İTÜ Bilgisayar Mühendisi, Amatör fotoğrafçı, Software Engineer">
+    <meta name="keywords" content="İbrahim Sipahi, Kişisel Blog, İTÜ Bilgisayar Mühendisi, fotoğraf, yazılım">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf8">
+    <meta name="language" content="Turkish">
+    <meta name="revisit-after" content="1 days">
+    <meta name="author" content="İbrahim Sipahi">
+
+
+    <title>@ViewBag.Title</title>
+
+    <link rel="canonical" href="http://www.ibrahimsipahi.com" />
+    <link rel="shortcut icon" href="/font/logo2.png" type="image/x-icon" />
+
+    <link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/css.css" rel="stylesheet" />
+    <link href="/css/blog.css" rel="stylesheet" />
+
+</head>
+
+<body>
+
+    <div class="container">
+        @await Html.PartialAsync("_Header")
+
+        @RenderBody()
+    </div>
+
+</body>
+</html>

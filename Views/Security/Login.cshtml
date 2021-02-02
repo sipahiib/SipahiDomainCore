@@ -1,0 +1,36 @@
+﻿@model Users
+
+@{
+    ViewBag.Title = "Üye/Giriş Ekranı";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Üye Giriş Ekranı</title>
+    <link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <form asp-action="Login" method="post">
+        <div asp-validation-summary="All"></div>
+
+        <p class="p-0 text-muted">@TempData["Invalid"]</p>
+
+        <div class="form-group">
+            <input asp-for="Email" class="form-control" , placeholder="Mail adresini giriniz" />
+        </div>
+        <div class="form-group">
+            <input asp-for="Sifre" class="form-control" , placeholder="Şifrenizi giriniz" />
+        </div>
+
+        <button type="submit" class="btn btn-block btn-success">Giriş Yap</button>
+    </form>
+
+    <br />
+    @Html.ActionLink("Şifremi Unuttum", "PasswordRemember", "Security", new { area = "" }, new { @class = "btn btn-sm btn-outline-danger " })
+
+</body>
+</html>

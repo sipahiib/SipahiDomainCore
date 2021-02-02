@@ -1,0 +1,6 @@
+﻿
+**DB'deki düzenlemeler sonrası, aşağıdaki komut ile DB alanları güncellenir. 
+herbir migration işlemine bir isim atanır ve öyle çalıştırılır. 
+
+1- PM> add-migration first
+2- PM> update-database

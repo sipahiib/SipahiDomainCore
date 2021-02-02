@@ -1,0 +1,25 @@
+﻿
+<footer class="blog-footer">
+
+    <script type="text/javascript">
+        window.onscroll = function () { scrollFunction() };
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("myBtn").style.display = "block";
+            } else {
+                document.getElementById("myBtn").style.display = "none";
+            }
+        }
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+
+    @*<p class="align-items-center">*@
+    <div class="col-6 d-flex justify-content-end align-items-center">
+        <a class="btn btn-sm btn-outline-secondary align-items-center" onclick="topFunction()" id="myBtn">Başa Dön</a>
+    </div>
+    @*</p>*@
+    <p class="align-items-center">Copyright @DateTime.Now.Year © İbrahim Sipahi</p>
+</footer>

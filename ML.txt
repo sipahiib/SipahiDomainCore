@@ -1,0 +1,18 @@
+Like	Comment
+1	harika
+1	süper
+0	iğrenç, igrenc, igrenç
+1	başarılı
+1	güzel, güzeel
+1	oo. ooo
+0	başarısız
+0	kötü
+0	bok gibi
+1	nirvana
+0	bok
+0.5	fena değil. değil. degil
+0.5	eh işte
+0.5	yetersiz
+1	hoş
+1	aferin
+1	nirvana

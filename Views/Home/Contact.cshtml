@@ -1,0 +1,43 @@
+﻿
+@model MailModels
+
+@{
+    ViewBag.Title = "İletişim";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+<link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<form asp-action="Contact" method="post">
+    <div asp-validation-summary="All"></div>
+
+    <div class="p-4">
+        <div class="form-group col-md-6">
+            <input asp-for="Email" class="form-control" , placeholder="Mail adresiniz *" />
+        </div>
+
+        <div class="form-group col-md-6">
+            <input asp-for="Message" class="form-control" , placeholder="Mesaj *" />
+        </div>
+
+        <div class="form-group col-md-6">
+            <button type="submit" class="btn btn-success">Gönder</button>
+            <p class="p-0 text-muted">@TempData["Mail"]</p>
+            <p class="p-0 text-muted">YapayZeka Tahmini: @TempData["Tahmin"]</p>           
+        </div>
+    </div>
+</form>
+
+
+<div class="p-4">
+    <h4 class="font-italic">Hesaplarım</h4>
+    <a href="https://www.linkedin.com/in/sipahiib/"><img src="/font/linkedin.png" width="50" height="30" /></a>
+    <a href="https://github.com/sipahiib"><img src="/font/github.png" width="30" height="30" /></a>
+    <a href="https://twitter.com/sipahisipahiib/"><img src="/font/twitter.png" width="30" height="30" /></a>
+    <a href="https://www.instagram.com/sipahiib/"><img src="/font/insta.jpeg" width="50" height="30" /></a>
+</div>
+
+
+
