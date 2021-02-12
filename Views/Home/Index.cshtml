@@ -98,23 +98,22 @@
             <aside class="col-md-4 blog-sidebar">
                 <div class="p-4 mb-3 bg-light rounded">
                     <h4 class="font-italic">Takip Edebilirsin</h4>
-                    @foreach (var item in Model.Followups)
-                    {
-                        <a href="@item.Link"> <p class="mb-0"><em>@item.Name</em> </p></a>
-                    }
-                </div>
-
-
-                <div class="p-4">
-                    <h4 class="font-italic">Eğitim Linkleri</h4>
                     <ol class="list-unstyled mb-0">
-                        @foreach (var item in Model.Educations)
+                        @foreach (var item in Model.Followups.GetChildren())
                         {
-                            <li><a href="@item.Link">@item.Name</a></li>
+                            <li><a href="@item.GetSection("Link").Value">@item.GetSection("Name").Value </a></li>
                         }
                     </ol>
                 </div>
-
+                <div class="p-4 mb-3 bg-light rounded">               
+                        <h4 class="font-italic">Eğitim Linkleri</h4>
+                        <ol class="list-unstyled mb-0">
+                            @foreach (var item in Model.Educations.GetChildren())
+                            {
+                                <li><a href="@item.GetSection("Link").Value">@item.GetSection("Name").Value</a></li>
+                            }
+                        </ol>                
+                </div>
             </aside><!-- /.blog-sidebar -->
 
         </div><!-- /.row -->
