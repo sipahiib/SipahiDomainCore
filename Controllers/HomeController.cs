@@ -6,11 +6,11 @@ using Microsoft.ML;
 using SipahiDomainCore.Models;
 using SipahiDomainCoreML.Model;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
+
 
 namespace SipahiDomainCore.Controllers
 {
@@ -27,35 +27,38 @@ namespace SipahiDomainCore.Controllers
         {
             TempData["Kullanici"] = HttpContext.Session.GetString("kullanici");
 
-            var followups = new List<Followups>()
-            {
-                new Followups() { Name= "Tim Corey", Link="https://www.youtube.com/user/IAmTimCorey"} ,
-                new Followups() { Name= "Bora Kaşmer", Link="https://www.youtube.com/channel/UCEQB9Atxfn5AJgX6KfwvTyA"} ,
-                new Followups() { Name= "dotNET", Link="https://www.youtube.com/channel/UCvtT19MZW8dq5Wwfu6B0oxw"},
-                new Followups() { Name= "NDC Conferences", Link="https://www.youtube.com/channel/UCTdw38Cw6jcm0atBPA39a0Q"},
-                new Followups() { Name= "Barış Özcan", Link="https://www.youtube.com/channel/UCv6jcPwFujuTIwFQ11jt1Yw"},
-                new Followups() { Name= "Özgür Demirtaş", Link="https://twitter.com/ProfDemirtas"},
-                new Followups() { Name= "Emin Çapa", Link="https://twitter.com/ecapa_aklinizi"}
-            };
+            #region Method1
+            //var followups = new List<Followups>()
+            //{
+            //    new Followups() { Name= "Tim Corey", Link="https://www.youtube.com/user/IAmTimCorey"} ,
+            //    new Followups() { Name= "Bora Kaşmer", Link="https://www.youtube.com/channel/UCEQB9Atxfn5AJgX6KfwvTyA"} ,
+            //    new Followups() { Name= "dotNET", Link="https://www.youtube.com/channel/UCvtT19MZW8dq5Wwfu6B0oxw"},
+            //    new Followups() { Name= "NDC Conferences", Link="https://www.youtube.com/channel/UCTdw38Cw6jcm0atBPA39a0Q"},
+            //    new Followups() { Name= "Barış Özcan", Link="https://www.youtube.com/channel/UCv6jcPwFujuTIwFQ11jt1Yw"},
+            //    new Followups() { Name= "Özgür Demirtaş", Link="https://twitter.com/ProfDemirtas"},
+            //    new Followups() { Name= "Emin Çapa", Link="https://twitter.com/ecapa_aklinizi"}
+            //};
 
-            var educations = new List<Education>()
-            {
-                new Education() { Name="Medium" , Link="https://www.medium.com/"},
-                new Education() { Name="Machine Learning" , Link="https://www.coursera.org/learn/machine-learning"},
-                new Education() { Name="edX-Online Course" , Link="https://www.edx.org/"},
-                new Education() { Name="Edabit" , Link="https://edabit.com"},
-                new Education() { Name="Hackerrank" , Link="https://hackerrank.com"},
-                new Education() { Name="Flutter" , Link="https://www.youtube.com/watch?v=ulg2dpPkulw&list=PLUbFnGajtZlX9ubiLzYz_cw92esraiIBi&index=1"},
-                new Education() { Name="Microservices" , Link="https://microservices.io/"},
-                new Education() { Name="Techie Delight" , Link="https://www.techiedelight.com/"},
-                new Education() { Name="Geeks for Geeks" , Link="https://www.geeksforgeeks.org/"},
-                new Education() { Name="Mobilhanem" , Link="https://www.mobilhanem.com/"}
-            };
+            //var educations = new List<Education>()
+            //{
+            //    new Education() { Name="Medium" , Link="https://www.medium.com/"},
+            //    new Education() { Name="Machine Learning" , Link="https://www.coursera.org/learn/machine-learning"},
+            //    new Education() { Name="edX-Online Course" , Link="https://www.edx.org/"},
+            //    new Education() { Name="Edabit" , Link="https://edabit.com"},
+            //    new Education() { Name="Hackerrank" , Link="https://hackerrank.com"},
+            //    new Education() { Name="Flutter" , Link="https://www.youtube.com/watch?v=ulg2dpPkulw&list=PLUbFnGajtZlX9ubiLzYz_cw92esraiIBi&index=1"},
+            //    new Education() { Name="Microservices" , Link="https://microservices.io/"},
+            //    new Education() { Name="Techie Delight" , Link="https://www.techiedelight.com/"},
+            //    new Education() { Name="Geeks for Geeks" , Link="https://www.geeksforgeeks.org/"},
+            //    new Education() { Name="Mobilhanem" , Link="https://www.mobilhanem.com/"}
+            //}; 
+            #endregion
 
+            var builder = new ConfigurationBuilder().AddJsonFile("Descriptions.json").Build();
             var model = new ViewModels.ViewModels()
             {
-                Followups = followups,
-                Educations = educations
+                Followups = builder.GetSection("Followup"),
+                Educations = builder.GetSection("Education")
             };
 
             return View(model);
@@ -96,7 +99,7 @@ namespace SipahiDomainCore.Controllers
                 mail.To.Add(info);
                 mail.Subject = "Yeni Bir Görüş";
                 mail.Body = message.ToString();
-                mail.IsBodyHtml = true; 
+                mail.IsBodyHtml = true;
                 #endregion
 
                 SendMail(mail, config);
@@ -120,17 +123,17 @@ namespace SipahiDomainCore.Controllers
 
             if (Convert.ToDecimal(res.Prediction) < (decimal)0.5)
             {
-                TempData["Tahmin"] = "Yorumunuz, 'Olumsuz' olarak tahmin edildi.";
+                TempData["Tahmin"] = "'Olumsuz' görüş bildirdiniz. Dikkate alacağım.";
                 res.Prediction = 0;
             }
             else if (Convert.ToDecimal(res.Prediction) >= (decimal)0.5 && Convert.ToDecimal(res.Prediction) < 1)
             {
-                TempData["Tahmin"] = "Yorumunuz, 'Fena Değil' olarak tahmin edildi.";
+                TempData["Tahmin"] = "'Fena Değil' görüşü bildirdiniz. Dikkate alacağım.";
                 res.Prediction = (float)0.5;
             }
             else
             {
-                TempData["Tahmin"] = "Yorumunuz, 'Olumlu' olarak tahmin edildi.";
+                TempData["Tahmin"] = "'Olumlu' görüş bildirdiniz. Teşekkürler!";
                 res.Prediction = 1;
             }
 
