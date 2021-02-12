@@ -15,4 +15,5 @@ Like	Comment
 0.5	yetersiz
 1	hoş
 1	aferin
-1	nirvana
+0	mutsuz
+1	mutlu
