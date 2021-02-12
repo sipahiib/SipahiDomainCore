@@ -1,0 +1,75 @@
+{
+  "Education": [
+    {
+      "Name": "Medium",
+      "Link": "https://www.medium.com/"
+    },
+    {
+      "Name": "Machine Learning",
+      "Link": "https://www.coursera.org/learn/machine-learning"
+    },
+    {
+      "Name": "edX-Online Course",
+      "Link": "https://www.edx.org/"
+    },
+    {
+      "Name": "Edabit",
+      "Link": "https://edabit.com"
+    },
+    {
+      "Name": "Hackerrank",
+      "Link": "https://hackerrank.com"
+    },
+    {
+      "Name": "Flutter",
+      "Link": "https://www.youtube.com/watch?v=ulg2dpPkulw&list=PLUbFnGajtZlX9ubiLzYz_cw92esraiIBi&index=1"
+    },
+    {
+      "Name": "Microservices",
+      "Link": "https://microservices.io/"
+    },
+    {
+      "Name": "Techie Delight",
+      "Link": "https://www.techiedelight.com/"
+    },
+    {
+      "Name": "Geeks for Geeks",
+      "Link": "https://www.geeksforgeeks.org/"
+    },
+    {
+      "Name": "Mobilhanem",
+      "Link": "https://www.mobilhanem.com/"
+    }
+  ],
+
+  "Followup": [
+    {
+      "Name": "Tim Corey",
+      "Link": "https://www.youtube.com/user/IAmTimCorey"
+    },
+    {
+      "Name": "Bora Kasmer",
+      "Link": "https://www.youtube.com/channel/UCEQB9Atxfn5AJgX6KfwvTyA"
+    },
+    {
+      "Name": "dotNET",
+      "Link": "https://www.youtube.com/channel/UCvtT19MZW8dq5Wwfu6B0oxw"
+    },
+    {
+      "Name": "NDC Conferences",
+      "Link": "https://www.youtube.com/channel/UCTdw38Cw6jcm0atBPA39a0Q"
+    },
+    {
+      "Name": "Baris Ozcan",
+      "Link": "https://www.youtube.com/channel/UCv6jcPwFujuTIwFQ11jt1Yw"
+    },
+    {
+      "Name": "Ozgur Demirtas",
+      "Link": "https://twitter.com/ProfDemirtas"
+    },
+    {
+      "Name": "Emin Capa",
+      "Link": "https://twitter.com/ecapa_aklinizi"
+    }
+  ]
+}
