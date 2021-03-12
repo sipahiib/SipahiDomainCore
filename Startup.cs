@@ -1,9 +1,13 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SipahiDomainCore.Validators;
 using System;
+using System.Globalization;
 
 namespace SipahiDomainCore
 {
@@ -15,7 +19,7 @@ namespace SipahiDomainCore
         }
 
         public IConfiguration Configuration { get; }
-        
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
@@ -25,19 +29,29 @@ namespace SipahiDomainCore
                 options.IdleTimeout = TimeSpan.FromMinutes(1);
             });
             services.AddMvc(options => options.EnableEndpointRouting = false);
+
+            services.AddControllersWithViews().AddFluentValidation();
+            services.AddTransient<IValidator, ContactFormValidator>();
         }
-        
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-           
+
+            //türkçe karakterler çıkması için (descriptions.json)
+            var cultureInfo = new CultureInfo("tr-TR");
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseSession();
             app.UseRouting();
+            app.UseAuthorization();
+            app.UseSession();
+
 
             app.UseMvc(routes =>
             {
@@ -63,7 +77,7 @@ namespace SipahiDomainCore
                     template: "{Controller=Home}/{action=Index}/{id?}");
             });
 
-            //app.UseAuthorization();
+
 
             //app.UseEndpoints(endpoints =>
             //{
