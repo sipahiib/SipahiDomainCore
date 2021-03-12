@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FluentValidation.Results;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.ML;
 using SipahiDomainCore.Models;
+using SipahiDomainCore.Validators;
 using SipahiDomainCoreML.Model;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Mail;
@@ -80,34 +83,49 @@ namespace SipahiDomainCore.Controllers
         [Route("iletisim")]
         public IActionResult Contact(MailModels e)
         {
-            if (ModelState.IsValid)
+            ContactFormValidator validator = new ContactFormValidator();
+            ValidationResult result = validator.Validate(e);
+
+            if (!result.IsValid)
             {
-                CommentPrediction(e);
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                }
 
-                #region MailInfo
-                var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("Mail");
-                string info = config["InfoMail"];
-
-                StringBuilder message = new StringBuilder();
-                MailAddress from = new MailAddress(e.Email.ToString());
-                message.AppendLine("Email: " + e.Email);
-                message.AppendLine(e.Message);
-
-                MailMessage mail = new MailMessage();
-
-                mail.From = from;
-                mail.To.Add(info);
-                mail.Subject = "Yeni Bir Görüş";
-                mail.Body = message.ToString();
-                mail.IsBodyHtml = true;
-                #endregion
-
-                SendMail(mail, config);
+                return View();
             }
+
+
+            //if (ModelState.IsValid)
+            //{
+            CommentPrediction(e);
+
+            #region MailInfo
+            var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("Mail");
+            string info = config["InfoMail"];
+
+            StringBuilder message = new StringBuilder();
+            MailAddress from = new MailAddress(e.Email.ToString());
+            message.AppendLine("Email: " + e.Email);
+            message.AppendLine(e.Message);
+
+            MailMessage mail = new MailMessage();
+
+            mail.From = from;
+            mail.To.Add(info);
+            mail.Subject = "Yeni Bir Görüş";
+            mail.Body = message.ToString();
+            mail.IsBodyHtml = true;
+            #endregion
+
+            SendMail(mail, config);
+            //}
 
             ModelState.Clear();
             return View();
         }
+
 
         private void CommentPrediction(MailModels e)
         {
